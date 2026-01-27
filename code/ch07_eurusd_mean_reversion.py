@@ -300,6 +300,11 @@ def plot_equity_curves(
     wealth_bh = (1.0 + net_ret_bh).cumprod()  # buy-and-hold equity curve
     wealth_coin = (1.0 + net_ret_coin).cumprod()  # coin-flip equity
 
+    # Normalise all curves to start at wealth 1.0 on the first date
+    wealth_mr = wealth_mr / wealth_mr.iloc[0]
+    wealth_bh = wealth_bh / wealth_bh.iloc[0]
+    wealth_coin = wealth_coin / wealth_coin.iloc[0]
+
     fig, ax = plt.subplots(figsize=(7.0, 3.2))  # single axes for curves
     cmap = plt.cm.coolwarm  # shared colour map
 
