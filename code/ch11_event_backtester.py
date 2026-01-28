@@ -451,8 +451,8 @@ def main(
     symbol: str="EURUSD",
     fast_window: int=20,
     slow_window: int=100,
-    cost: float=0.0005,
-    fin: float=0.0001,
+    cost: float=0.0001,
+    fin: float=0.00001,
     leverage: float=1.0,
     start: str | None=None,
     end: str | None=None,
@@ -500,6 +500,7 @@ def main(
         pos_sma_raw.reindex(prices.index).ffill().fillna(0.0)
     )
     pos_sma = leverage * pos_sma  # apply leverage only to SMA strategy
+    pos_sma = pos_sma.shift(1).fillna(0.0)  # trade on next bar
 
     pos_bh = build_positions_buy_and_hold(prices)
 

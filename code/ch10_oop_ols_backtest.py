@@ -48,6 +48,7 @@ from ch08_ols_baseline import (  # OLS utilities from Chapter 8
     standardise_features,
     fit_ols,
     predict_ols,
+    sweep_ols_parameters,
 )
 
 plt.style.use("seaborn-v0_8")  # consistent plotting style across figures
@@ -149,7 +150,6 @@ class OLSStrategy:
             n_lags=self.n_lags,
             symbol=self.symbol,
         )
-        features_scaled = standardise_features(features_lagged)
 
         start_ts = (
             pd.to_datetime(self.start) if self.start is not None else None
@@ -158,7 +158,10 @@ class OLSStrategy:
             pd.to_datetime(self.end) if self.end is not None else None
         )
         if start_ts is not None or end_ts is not None:
-            features_scaled = features_scaled.loc[start_ts:end_ts]
+            features_lagged = features_lagged.loc[start_ts:end_ts]
+            targets = targets.loc[features_lagged.index]
+
+        features_scaled = standardise_features(features_lagged)
 
         n_obs = features_scaled.shape[0]
         split_idx = int(self.train_fraction * n_obs)
@@ -189,8 +192,8 @@ class PortfolioBacktester:
         self,
         data_handler: EODDataHandler,
         strategy: OLSStrategy,
-        cost_rate: float=0.0005,
-        fin_rate: float=0.0001,
+        cost_rate: float=0.0002,
+        fin_rate: float=0.00005,
     ) -> None:
         self.data_handler = data_handler
         self.strategy = strategy
@@ -449,12 +452,46 @@ def main(
     entry_threshold: float=0.002,
     leverage: float=1.0,
     train_fraction: float=0.7,
-    cost: float=0.0005,
-    fin: float=0.0001,
+    cost: float=0.0002,
+    fin: float=0.00005,
     start: str | None=None,
     end: str | None=None,
+    do_sweep: bool=False,
 ) -> None:
     """Run object-oriented OLS backtest and create figures and macros."""
+    sweep_results = sweep_ols_parameters(
+        n_lags_list=[1, 3, 5, 10],
+        entry_values=[0.0, 0.0001, 0.0002, 0.0005, 0.0010],
+        leverage_values=[0.5, 1.0, 1.5, 2.0],
+        cost=cost,
+        fin=fin,
+        train_fraction=train_fraction,
+        symbol=symbol,
+        start=start,
+        end=end,
+    )
+
+    if not sweep_results.empty:
+        candidates = sweep_results[
+            (sweep_results["sharpe"] > 0.0)
+            & (sweep_results["final_wealth"] > 1.0)
+        ]
+        if candidates.empty:
+            candidates = sweep_results[sweep_results["sharpe"] > 0.0]
+        if candidates.empty:
+            candidates = sweep_results
+        best = candidates.sort_values(
+            by=["sharpe", "ann_return"],
+            ascending=[False, False],
+        ).iloc[0]
+        n_lags_selected = int(best["lags"])
+        entry_selected = float(best["entry"])
+        leverage_selected = float(best["leverage"])
+    else:
+        n_lags_selected = n_lags
+        entry_selected = entry_threshold
+        leverage_selected = leverage
+
     data_handler = EODDataHandler(
         symbol=symbol,
         start=start,
@@ -462,9 +499,9 @@ def main(
     )
     strategy = OLSStrategy(
         symbol=symbol,
-        n_lags=n_lags,
-        entry_threshold=entry_threshold,
-        leverage=leverage,
+        n_lags=n_lags_selected,
+        entry_threshold=entry_selected,
+        leverage=leverage_selected,
         train_fraction=train_fraction,
         start=start,
         end=end,
@@ -501,9 +538,9 @@ def main(
         trades_bh,
         trades_ols,
         symbol,
-        n_lags,
-        entry_threshold,
-        leverage,
+        n_lags_selected,
+        entry_selected,
+        leverage_selected,
         cost,
         fin,
         train_start,
@@ -519,6 +556,32 @@ def main(
     pprint(metrics_bh)
     print("OOP OLS strategy:")
     pprint(metrics_ols)
+
+    if do_sweep and not sweep_results.empty:
+        csv_path = Path("figures/ch10_oop_parameter_sweep.csv")
+        sweep_results.to_csv(csv_path, index=False)
+        print("Top OOP OLS parameter sets (by Sharpe):")
+        print(
+            sweep_results[
+                [
+                    "lags",
+                    "entry",
+                    "leverage",
+                    "final_wealth",
+                    "ann_return",
+                    "ann_vol",
+                    "sharpe",
+                    "max_drawdown",
+                    "hit_ratio",
+                    "num_trades",
+                ]
+            ]
+            .head(5)
+            .to_string(
+                index=False,
+                float_format=lambda v: f"{v: .4f}",
+            )
+        )
 
 
 if __name__ == "__main__":
@@ -562,14 +625,14 @@ if __name__ == "__main__":
     parser.add_argument(
         "--cost",
         type=float,
-        default=0.0005,
-        help="transaction-cost rate per unit turnover (default: 0.0005)",
+        default=0.0002,
+        help="transaction-cost rate per unit turnover (default: 0.0002)",
     )
     parser.add_argument(
         "--fin",
         type=float,
-        default=0.0001,
-        help="daily financing rate on absolute position (default: 0.0001)",
+        default=0.00005,
+        help="daily financing rate on absolute position (default: 0.00005)",
     )
     parser.add_argument(
         "--start",
@@ -583,6 +646,11 @@ if __name__ == "__main__":
         default=None,
         help='optional end date for the sample, for example "2025-01-01"',
     )
+    parser.add_argument(
+        "--sweep",
+        action="store_true",
+        help="export parameter sweep as CSV",
+    )
 
     args = parser.parse_args()
     main(
@@ -595,4 +663,5 @@ if __name__ == "__main__":
         fin=args.fin,
         start=args.start,
         end=args.end,
+        do_sweep=args.sweep,
     )
