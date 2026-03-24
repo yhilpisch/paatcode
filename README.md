@@ -55,6 +55,38 @@ Some notebooks and scripts call external data vendors, broker APIs, or AI servic
 - Keep `code/creds.py` private; it is excluded from version control by `.gitignore`.  
 - If a vendor SDK relies on a separate config file (for example `trading_ig`), create it locally and keep it private as well.  
 
+The wrappers expect a small plain-Python module structure rather than a
+special secrets manager. In practice, `code/creds.py` should look broadly like
+this:
+
+```python
+eod_key = "YOUR_EODHD_API_KEY"
+
+oanda_access_token = "YOUR_OANDA_ACCESS_TOKEN"
+oanda_account_id = "YOUR_OANDA_ACCOUNT_ID"
+oanda_account_type = "practice"  # or "live"
+
+openai_key = "YOUR_OPENAI_API_KEY"
+```
+
+The IG examples use a separate configuration object. Create a local module
+named `trading_ig_config.py` on your Python path with a `config` class or
+object that provides the expected attributes:
+
+```python
+class config:
+    username = "YOUR_IG_USERNAME"
+    password = "YOUR_IG_PASSWORD"
+    api_key = "YOUR_IG_API_KEY"
+    acc_type = "demo"  # or "live"
+    acc_number = "YOUR_IG_ACCOUNT_ID"
+```
+
+The EODHD wrapper reads `eod_key` from `code/creds.py`. The Oanda wrapper
+reads `oanda_access_token`, `oanda_account_id`, and `oanda_account_type` from
+the same file. The IG wrapper reads `username`, `password`, `api_key`,
+`acc_type`, and `acc_number` from `trading_ig_config.py`.
+
 ## Disclaimer
 
 This repository and its contents are provided for educational and illustrative purposes only and come without any warranty or guarantees of any kind — express or implied. Use at your own risk. The authors and The Python Quants GmbH are not responsible for any direct or indirect damages, losses, or issues arising from the use of this code. Do not use the provided examples for critical decision‑making, financial transactions, medical advice, or production deployments without rigorous review, testing, and validation.
