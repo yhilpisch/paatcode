@@ -30,6 +30,7 @@ The material follows the structure of the book *Python & AI for Algorithmic Trad
 
 - `notebooks/` — chapter notebooks (`chXX_*.ipynb`) that bring together concepts, code, and plots for each part of the book.
 - `code/` — standalone Python modules and helper scripts used for simulations, backtests, streaming examples, and diagnostics.
+- `wrappers/` — lightweight client wrappers for external data vendors and broker APIs used by selected chapter scripts.
 
 See the `README.md` files inside `notebooks/` and `code/` for concise per-file overviews.
 

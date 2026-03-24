@@ -44,3 +44,11 @@ The `code/streaming/` subfolder contains ZeroMQ‑based streaming examples:
 
 Each script is designed so that you can import its functions into your own projects or run it directly from the command line to reproduce the corresponding experiment or figure.
 
+## Wrappers
+
+The top-level `wrappers/` folder contains lightweight helper modules for the
+external services used in later chapters:
+
+- `tpqeod.py` — minimal `EODHD` client for end-of-day and intraday market data.
+- `tpqoa.py` — small `OandaClient` wrapper for account, pricing, and order flows.
+- `tpqig.py` — thin `IGClient` wrapper for session handling and trading actions.
