@@ -1,7 +1,3 @@
-import numpy as np  # numerical arrays and math
-import pandas as pd  # time-series and tabular data
-import matplotlib.pyplot as plt  # plotting library for figures
-
 """
 Python & AI for Algorithmic Trading
 Chapter 2 -- Practical Python Tests of Market Efficiency
@@ -17,6 +13,10 @@ generates a two-panel figure with the price path and log-return histogram.
 It also writes a small LaTeX helper file with macros so that the numbers
 quoted in the manuscript stay in sync with the data.
 """
+
+import numpy as np  # numerical arrays and math
+import pandas as pd  # time-series and tabular data
+import matplotlib.pyplot as plt  # plotting library for figures
 
 plt.style.use("seaborn-v0_8")  # consistent plotting style
 
@@ -40,7 +40,8 @@ def compute_spy_diagnostics(
     max_lag: int=5,
 ) -> tuple[pd.Series, dict[str, float]]:
     """Compute log-returns and summary diagnostics for SPY."""
-    spy_log_ret = np.log(spy_prices / spy_prices.shift(1))  # log-returns from prices
+    # log-returns from prices
+    spy_log_ret = np.log(spy_prices / spy_prices.shift(1))
     spy_log_ret = spy_log_ret.dropna()  # drop first NaN
 
     n_obs = spy_log_ret.shape[0]  # number of observations

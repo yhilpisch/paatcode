@@ -1,11 +1,3 @@
-from pathlib import Path  # filesystem paths for macro and figure output
-
-from pprint import pprint  # pretty printing
-import numpy as np  # numerical arrays and statistics
-import pandas as pd  # tabular time-series structures
-import matplotlib.pyplot as plt  # plotting library for figures
-import matplotlib.dates as mdates  # date locators and formatters for axes
-
 """
 Python & AI for Algorithmic Trading
 Chapter 7 -- Baseline Technical Strategies and Vectorised Backtesting
@@ -34,6 +26,14 @@ Running the script performs four main tasks.
 The aim is to provide a concrete numerical reference for Chapter 7, using
 exactly the same data set and cost structure as the earlier diagnostics.
 """
+
+from pathlib import Path  # filesystem paths for macro and figure output
+
+from pprint import pprint  # pretty printing
+import numpy as np  # numerical arrays and statistics
+import pandas as pd  # tabular time-series structures
+import matplotlib.pyplot as plt  # plotting library for figures
+import matplotlib.dates as mdates  # date locators and formatters for axes
 
 from ch05_eod_engineering import load_eod_panel  # static EOD price panel
 from ch07_baseline_strategies import (  # backtest helpers for Chapter 7
@@ -542,7 +542,7 @@ def main(
         )
         if not sweep_results.empty:
             csv_path = Path("figures/ch07_eurusd_mr_parameter_sweep.csv")
-            sweep_results.to_csv(csv_path, index=False)  # save full grid results
+            sweep_results.to_csv(csv_path, index=False)  # save grid results
             print("Top EURUSD mean-reversion parameter sets (by Sharpe):")
             print(
                 sweep_results.head(5).to_string(

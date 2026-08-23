@@ -1,10 +1,3 @@
-from pathlib import Path  # filesystem paths for optional local data
-
-import numpy as np  # numerical arrays and statistics
-import pandas as pd  # data loading and time-series handling
-import matplotlib.pyplot as plt  # plotting library for figures
-from scipy import stats  # normal densities for reference curves
-
 """
 Python & AI for Algorithmic Trading
 Chapter 5 -- Static EOD Data: CSV Baseline and Data Engineering
@@ -23,6 +16,13 @@ The functions are written to be reusable from interactive sessions and from
 the LaTeX examples. Running the script as a program refreshes all figures and
 the macro file in one go.
 """
+
+from pathlib import Path  # filesystem paths for optional local data
+
+import numpy as np  # numerical arrays and statistics
+import pandas as pd  # data loading and time-series handling
+import matplotlib.pyplot as plt  # plotting library for figures
+from scipy import stats  # normal densities for reference curves
 
 plt.style.use("seaborn-v0_8")  # consistent plotting style across figures
 

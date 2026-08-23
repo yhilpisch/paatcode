@@ -1,10 +1,3 @@
-from pathlib import Path  # filesystem paths for relative imports
-import sys  # access to Python's module search path
-
-import numpy as np  # numerical helpers for returns and autocorrelations
-import pandas as pd  # tabular time-series structures
-import matplotlib.pyplot as plt  # plotting library for figures
-
 """
 Python & AI for Algorithmic Trading
 Chapter 6 -- EODHD API: From Static CSV to Live Data
@@ -30,6 +23,13 @@ The script performs three main tasks.
 It is intentionally compact but fully commented so that it can serve as a
 template for later chapters that build more elaborate diagnostics.
 """
+
+from pathlib import Path  # filesystem paths for relative imports
+import sys  # access to Python's module search path
+
+import numpy as np  # numerical helpers for returns and autocorrelations
+import pandas as pd  # tabular time-series structures
+import matplotlib.pyplot as plt  # plotting library for figures
 
 # Ensure that the project root (which contains the ``wrappers`` package) is
 # on the Python module search path even when executing this file via

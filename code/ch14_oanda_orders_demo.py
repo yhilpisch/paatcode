@@ -1,8 +1,3 @@
-from pathlib import Path  # filesystem paths for project root resolution
-from datetime import datetime, timezone  # timestamps for logging
-import sys  # access to Python's module search path
-from typing import Any  # type hints for dictionaries
-
 """
 Python & AI for Algorithmic Trading
 Chapter 14 -- Working with Oanda Demo Accounts
@@ -26,6 +21,11 @@ in the safe practice environment while keeping the code compact and
 readable. All trade sizes are intentionally small so that the example
 remains a purely educational illustration.
 """
+
+from pathlib import Path  # filesystem paths for project root resolution
+from datetime import datetime, timezone  # timestamps for logging
+import sys  # access to Python's module search path
+from typing import Any  # type hints for dictionaries
 
 # Ensure that the project root (which contains the ``wrappers`` package) is
 # on the Python module search path even when executing this file via

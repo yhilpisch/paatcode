@@ -1,12 +1,3 @@
-from pathlib import Path  # filesystem paths for macro and figure output
-
-from pprint import pprint  # pretty printing of metric dictionaries
-import numpy as np  # numerical arrays and random numbers
-import pandas as pd  # tabular time-series structures
-import matplotlib.pyplot as plt  # plotting library for figures
-import matplotlib.dates as mdates  # date locators and formatters for axes
-import time  # wall-clock timing for training loop
-
 """
 Python & AI for Algorithmic Trading
 Chapter 9 -- Reinforcement Learning for Trading Decisions
@@ -42,6 +33,15 @@ of these ideas, including richer state representations and model
 architectures, see Hilpisch (2024), Reinforcement Learning for Finance
 -- A Python-based Introduction, published by O'Reilly.
 """
+
+from pathlib import Path  # filesystem paths for macro and figure output
+
+from pprint import pprint  # pretty printing of metric dictionaries
+import numpy as np  # numerical arrays and random numbers
+import pandas as pd  # tabular time-series structures
+import matplotlib.pyplot as plt  # plotting library for figures
+import matplotlib.dates as mdates  # date locators and formatters for axes
+import time  # wall-clock timing for training loop
 
 from ch05_eod_engineering import load_eod_panel  # static EOD price panel
 from ch07_baseline_strategies import (  # backtest helpers

@@ -1,9 +1,3 @@
-from dataclasses import dataclass  # configuration containers
-from pathlib import Path  # filesystem paths for transcripts
-from typing import Dict, List  # type hints for prompt pieces
-
-import json  # serialisation for saved prompt sessions
-
 """
 Python & AI for Algorithmic Trading
 Chapter 20 -- AI-Enhanced Research and Automation Workflows
@@ -19,6 +13,12 @@ they can be inspected, reproduced, and audited alongside code and
 data. You can plug your preferred model client into the small hooks
 provided here.
 """
+
+from dataclasses import dataclass  # configuration containers
+from pathlib import Path  # filesystem paths for transcripts
+from typing import Dict, List  # type hints for prompt pieces
+
+import json  # serialisation for saved prompt sessions
 
 
 @dataclass

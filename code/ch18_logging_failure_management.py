@@ -1,14 +1,3 @@
-from __future__ import annotations
-
-from dataclasses import dataclass  # configuration container
-from pathlib import Path  # filesystem paths for log files
-from typing import Callable, TypeVar  # generic types for wrappers
-
-import logging  # standard logging framework
-from logging.handlers import RotatingFileHandler  # log rotation
-import time  # timestamps for retry backoff
-import traceback  # text representations of tracebacks
-
 """
 Python & AI for Algorithmic Trading
 Chapter 18 -- Logging, Failure Management, and Resilience
@@ -28,6 +17,17 @@ reuse across collectors, strategy loops, and reporting jobs.
 3. A ``retry_with_backoff`` decorator for background jobs that should
    survive transient errors such as network hiccups or broker timeouts.
 """
+
+from __future__ import annotations
+
+from dataclasses import dataclass  # configuration container
+from pathlib import Path  # filesystem paths for log files
+from typing import Callable, TypeVar  # generic types for wrappers
+
+import logging  # standard logging framework
+from logging.handlers import RotatingFileHandler  # log rotation
+import time  # timestamps for retry backoff
+import traceback  # text representations of tracebacks
 
 LOGGER_NAME = "pyaialgo"
 

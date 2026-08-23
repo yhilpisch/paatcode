@@ -1,9 +1,3 @@
-from dataclasses import dataclass  # configuration containers
-from pathlib import Path  # filesystem paths for config output
-from typing import Dict, List  # type hints for service maps
-
-import json  # serialisation for schedule previews
-
 """
 Python & AI for Algorithmic Trading
 Chapter 17 -- Containers, Local Clouds, and Deployment Patterns
@@ -22,6 +16,12 @@ adapt to your own environment.
 You can treat this module as a bridge between the conceptual material
 of Chapter 17 and practical experiments with single-node deployments.
 """
+
+from dataclasses import dataclass  # configuration containers
+from pathlib import Path  # filesystem paths for config output
+from typing import Dict, List  # type hints for service maps
+
+import json  # serialisation for schedule previews
 
 
 @dataclass

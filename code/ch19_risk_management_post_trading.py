@@ -1,10 +1,3 @@
-from dataclasses import dataclass  # trade record container
-from pathlib import Path  # filesystem paths for trade logs
-from typing import Iterable  # type hints for trade collections
-
-import numpy as np  # numerical helpers for returns and risk
-import pandas as pd  # tabular structures for trades and equity
-
 """
 Python & AI for Algorithmic Trading
 Chapter 19 -- Risk Management and Post-Trading Analysis
@@ -19,6 +12,13 @@ with one row per fill. It provides tools to load such data, compute a
 simple marked-to-market equity curve, and derive risk summaries that
 can feed into Chapter 19 style reports.
 """
+
+from dataclasses import dataclass  # trade record container
+from pathlib import Path  # filesystem paths for trade logs
+from typing import Iterable  # type hints for trade collections
+
+import numpy as np  # numerical helpers for returns and risk
+import pandas as pd  # tabular structures for trades and equity
 
 
 @dataclass

@@ -1,10 +1,3 @@
-from pathlib import Path  # filesystem paths for macro and figure output
-
-from pprint import pprint  # pretty printing of metric dictionaries
-import numpy as np  # numerical arrays and linear algebra
-import pandas as pd  # tabular time-series structures
-import matplotlib.pyplot as plt  # plotting library for figures
-
 """
 Python & AI for Algorithmic Trading
 Chapter 10 -- Object-Oriented Backtesting and Trading System Design
@@ -36,6 +29,13 @@ The emphasis is on separation of concerns rather than on recreating a
 full event-based engine. For an example that simulates events and
 orders explicitly, see the Chapter 11 script.
 """
+
+from pathlib import Path  # filesystem paths for macro and figure output
+
+from pprint import pprint  # pretty printing of metric dictionaries
+import numpy as np  # numerical arrays and linear algebra
+import pandas as pd  # tabular time-series structures
+import matplotlib.pyplot as plt  # plotting library for figures
 
 from ch05_eod_engineering import load_eod_panel  # static EOD price panel
 from ch07_baseline_strategies import (  # backtest helpers
@@ -527,10 +527,12 @@ def main(
         strategy.generate_positions(),
     )
 
-    train_start = strategy.train_index[0].date().isoformat()  # type: ignore[index]
-    train_end = strategy.train_index[-1].date().isoformat()  # type: ignore[index]
-    test_start = strategy.test_index[0].date().isoformat()  # type: ignore[index]
-    test_end = strategy.test_index[-1].date().isoformat()  # type: ignore[index]
+    train_idx = strategy.train_index
+    test_idx = strategy.test_index
+    train_start = train_idx[0].date().isoformat()  # type: ignore[index]
+    train_end = train_idx[-1].date().isoformat()  # type: ignore[index]
+    test_start = test_idx[0].date().isoformat()  # type: ignore[index]
+    test_end = test_idx[-1].date().isoformat()  # type: ignore[index]
 
     write_tex_macros(
         metrics_bh,

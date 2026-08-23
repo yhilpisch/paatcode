@@ -1,5 +1,3 @@
-import numpy as np  # numerical routines for arrays
-
 """
 Python & AI for Algorithmic Trading
 Chapter 2 -- Practical Python Tests of Market Efficiency
@@ -14,6 +12,8 @@ and Y_t depends on lagged X_{t-1} plus its own noise. It reports the sample
 correlation between Y_t and X_{t-1} and writes a LaTeX macro that can be
 used in the manuscript to quote the current value.
 """
+
+import numpy as np  # numerical routines for arrays
 
 
 def simulate_toy_system(

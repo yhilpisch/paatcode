@@ -62,7 +62,11 @@ def main() -> None:
 
     ticks = load_ticks(db_path, cfg.lookback_seconds)
     if ticks.empty:
-        q({"kind": "portfolio_watch", "status": "no_ticks", "time": datetime.utcnow().isoformat()})
+        q({
+            "kind": "portfolio_watch",
+            "status": "no_ticks",
+            "time": datetime.utcnow().isoformat(),
+        })
         print("No recent ticks found in the SQLite database.")
         return
 
@@ -70,7 +74,9 @@ def main() -> None:
     portfolio = mark_to_market(last_prices, cfg.positions)
 
     total_value = float(portfolio["value"].sum())
-    total_notional = float((portfolio["price"].abs() * portfolio["units"].abs()).sum())
+    total_notional = float(
+        (portfolio["price"].abs() * portfolio["units"].abs()).sum()
+    )
 
     snapshot = {
         "kind": "portfolio_watch",

@@ -1,10 +1,3 @@
-from dataclasses import dataclass  # configuration container
-from pathlib import Path  # filesystem paths for figures and stats
-
-import numpy as np  # numerical arrays and random numbers
-import pandas as pd  # tabular containers for simulation output
-import matplotlib.pyplot as plt  # plotting library for figures
-
 """
 Python & AI for Algorithmic Trading
 Chapter 21 -- EMH in the Age of AI and Retail Algotrading
@@ -20,6 +13,13 @@ will display attractive Sharpe ratios over a finite sample purely by
 chance. This connects the Efficient Market Hypothesis to multiple-
 testing concerns in AI-assisted research workflows.
 """
+
+from dataclasses import dataclass  # configuration container
+from pathlib import Path  # filesystem paths for figures and stats
+
+import numpy as np  # numerical arrays and random numbers
+import pandas as pd  # tabular containers for simulation output
+import matplotlib.pyplot as plt  # plotting library for figures
 
 plt.style.use("seaborn-v0_8")  # shared plotting style
 

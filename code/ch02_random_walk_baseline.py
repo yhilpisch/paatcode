@@ -1,6 +1,3 @@
-import numpy as np  # numerical library for arrays and random numbers
-import matplotlib.pyplot as plt  # plotting library for figures
-
 """
 Python & AI for Algorithmic Trading
 Chapter 2 -- Practical Python Tests of Market Efficiency
@@ -16,6 +13,9 @@ autocorrelations for the log-returns, and produces a compact diagnostic
 figure. It also writes a small LaTeX helper file with macros used in the
 manuscript so that numeric results stay in sync with the code.
 """
+
+import numpy as np  # numerical library for arrays and random numbers
+import matplotlib.pyplot as plt  # plotting library for figures
 
 plt.style.use("seaborn-v0_8")  # consistent plotting style
 

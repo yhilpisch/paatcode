@@ -1,11 +1,3 @@
-from dataclasses import dataclass  # configuration container
-from pathlib import Path  # filesystem paths for reports and figures
-from typing import Iterable  # type hints for equity inputs
-
-import numpy as np  # numerical helpers for drawdowns and volatility
-import pandas as pd  # tabular time-series structures
-import matplotlib.pyplot as plt  # plotting library for report figures
-
 """
 Python & AI for Algorithmic Trading
 Chapter 16 -- Reporting and Monitoring for Retail Algotraders
@@ -29,6 +21,14 @@ data. They avoid external web frameworks and instead rely on familiar
 ``pandas`` and Matplotlib tools so that you can adapt them easily to
 your own monitoring environment.
 """
+
+from dataclasses import dataclass  # configuration container
+from pathlib import Path  # filesystem paths for reports and figures
+from typing import Iterable  # type hints for equity inputs
+
+import numpy as np  # numerical helpers for drawdowns and volatility
+import pandas as pd  # tabular time-series structures
+import matplotlib.pyplot as plt  # plotting library for report figures
 
 plt.style.use("seaborn-v0_8")  # shared plotting style for figures
 

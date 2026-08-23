@@ -4,7 +4,8 @@ Chapter 15 -- IG Markets and the Anatomy of an API Wrapper
 (c) Dr. Yves J. Hilpisch | The Python Quants GmbH
 AI-Powered by different LLMs | https://linktr.ee/dyjh
 
-Simple demo showing how to use :mod:`wrappers.IGClient` with the IG Markets demo API.
+Simple demo showing how to use :mod:`wrappers.IGClient` with the
+IG Markets demo API.
 """
 
 from __future__ import annotations
@@ -37,10 +38,25 @@ def _format_account_summary(summary: dict[str, object]) -> Iterable[str]:
 
 
 def main() -> None:
-    parser = ArgumentParser(description="Quick IG Markets demo using wrappers.IGClient")
-    parser.add_argument("--instrument", default="EUR/USD", help="Instrument name or epic to query")
-    parser.add_argument("--days", type=int, default=7, help="Number of days to request (default: 7)")
-    parser.add_argument("--granularity", default="D", help="IG resolution (for example D, 1H, 1Min)")
+    parser = ArgumentParser(
+        description="Quick IG Markets demo using wrappers.IGClient"
+    )
+    parser.add_argument(
+        "--instrument",
+        default="EUR/USD",
+        help="Instrument name or epic to query",
+    )
+    parser.add_argument(
+        "--days",
+        type=int,
+        default=7,
+        help="Number of days to request (default: 7)",
+    )
+    parser.add_argument(
+        "--granularity",
+        default="D",
+        help="IG resolution (for example D, 1H, 1Min)",
+    )
     parser.add_argument(
         "--end",
         default=datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S"),

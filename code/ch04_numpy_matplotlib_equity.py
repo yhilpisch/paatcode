@@ -1,6 +1,3 @@
-import numpy as np  # numerical arrays for simulations and returns
-import matplotlib.pyplot as plt  # plotting library for figures
-
 """
 Python & AI for Algorithmic Trading
 Chapter 4 -- The Scientific Python Stack for Algorithmic Trading
@@ -15,6 +12,9 @@ the corresponding equity curve, and plots it using Matplotlib. The figure is
 saved as a PDF and included in Chapter 4 to illustrate the combination of
 NumPy arrays and Matplotlib plotting in a compact example.
 """
+
+import numpy as np  # numerical arrays for simulations and returns
+import matplotlib.pyplot as plt  # plotting library for figures
 
 plt.style.use("seaborn-v0_8")  # consistent plotting style for all figures
 

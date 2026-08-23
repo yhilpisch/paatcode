@@ -1,9 +1,3 @@
-from dataclasses import dataclass  # configuration container
-from pathlib import Path  # filesystem paths for plan output
-from typing import List  # type hints for task lists
-
-import json  # serialisation of learning plans
-
 """
 Python & AI for Algorithmic Trading
 Chapter 22 -- Conclusions and Outlook
@@ -18,6 +12,12 @@ can live next to notebooks and configuration. This does not replace a
 full project-management tool but provides a light-weight structure you
 can adapt for personal study plans or research roadmaps.
 """
+
+from dataclasses import dataclass  # configuration container
+from pathlib import Path  # filesystem paths for plan output
+from typing import List  # type hints for task lists
+
+import json  # serialisation of learning plans
 
 
 @dataclass

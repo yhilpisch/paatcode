@@ -1,10 +1,3 @@
-from pathlib import Path  # filesystem paths for macro and figure output
-
-from pprint import pprint  # pretty printing of metric dictionaries
-import numpy as np  # numerical arrays and linear algebra
-import pandas as pd  # tabular time-series structures
-import matplotlib.pyplot as plt  # plotting library for figures
-
 """
 Python & AI for Algorithmic Trading
 Chapter 8 -- Predictive Modelling: OLS, Machine & Deep Learning
@@ -15,8 +8,8 @@ AI-Powered by different LLMs | https://linktr.ee/dyjh
 Baseline predictive modelling example for Chapter 8.
 
 This script implements a simple ordinary-least-squares (OLS) regression
-on engineered features for a single instrument and turns the resulting predictions into a
-trading strategy. The set-up is deliberately minimal:
+on engineered features for a single instrument and turns the resulting
+predictions into a trading strategy. The set-up is deliberately minimal:
 
 1. Build a daily feature panel for a chosen symbol using helper functions from
    Chapter 5 (log-returns, rolling means, rolling volatility, and a
@@ -34,6 +27,13 @@ The code follows the same conventions as earlier scripts: fully
 vectorised computations, explicit transaction costs and financing
 charges, and small helper functions that can be reused interactively.
 """
+
+from pathlib import Path  # filesystem paths for macro and figure output
+
+from pprint import pprint  # pretty printing of metric dictionaries
+import numpy as np  # numerical arrays and linear algebra
+import pandas as pd  # tabular time-series structures
+import matplotlib.pyplot as plt  # plotting library for figures
 
 from ch05_eod_engineering import load_eod_panel, build_feature_panel
 from ch07_baseline_strategies import (  # backtest helpers
@@ -390,7 +390,7 @@ def sweep_ols_parameters(
     test window, and records key performance statistics.
     """
     panel = load_eod_panel()  # full price panel from Chapter 5
-    prices = panel[symbol].astype(float)  # selecting time-series data for `symbol`
+    prices = panel[symbol].astype(float)  # price series for `symbol`
 
     start_ts = pd.to_datetime(start) if start is not None else None
     end_ts = pd.to_datetime(end) if end is not None else None
@@ -619,7 +619,7 @@ def main(
 
     # Price series and buy-and-hold benchmark
     panel = load_eod_panel()  # full price panel from Chapter 5
-    prices = panel[symbol].astype(float)  # selecting time-series data for `symbol`
+    prices = panel[symbol].astype(float)  # price series for `symbol`
     if start_ts is not None or end_ts is not None:
         prices = prices.loc[start_ts:end_ts]
 

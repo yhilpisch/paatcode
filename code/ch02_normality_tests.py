@@ -1,8 +1,3 @@
-import numpy as np  # numerical arrays and statistics
-import pandas as pd  # data loading and time-series handling
-import matplotlib.pyplot as plt  # plotting library for figures
-from scipy import stats  # statistical moments and normality tests
-
 """
 Python & AI for Algorithmic Trading
 Chapter 2 -- Practical Python Tests of Market Efficiency
@@ -20,6 +15,11 @@ histograms with normal probability density overlays and Q–Q style plots.
 The script also writes a small LaTeX helper file with macros so that the
 numeric results reported in the manuscript stay in sync with the code.
 """
+
+import numpy as np  # numerical arrays and statistics
+import pandas as pd  # data loading and time-series handling
+import matplotlib.pyplot as plt  # plotting library for figures
+from scipy import stats  # statistical moments and normality tests
 
 plt.style.use("seaborn-v0_8")  # consistent plotting style
 
@@ -47,7 +47,8 @@ def load_spy_log_returns(
     data = data.sort_index()  # ensure chronological order of the index
     spy_prices = data["SPY"].astype(float)  # extract SPY closing prices
 
-    log_ret = np.log(spy_prices / spy_prices.shift(1))  # log-returns from prices
+    # log-returns from prices
+    log_ret = np.log(spy_prices / spy_prices.shift(1))
     log_ret = log_ret.dropna()  # drop the first NaN observation
     return log_ret  # Pandas Series with DatetimeIndex
 

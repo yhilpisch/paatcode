@@ -1,8 +1,3 @@
-from pathlib import Path  # filesystem paths for project root resolution
-from datetime import datetime, timezone  # timestamps for logging
-import sys  # access to Python's module search path
-from typing import Any  # type hints for dictionaries
-
 """
 Python & AI for Algorithmic Trading
 Chapter 15 -- IG Markets and the Anatomy of an API Wrapper
@@ -26,6 +21,11 @@ in the safe demo environment while keeping the code compact and readable.
 All trade sizes are intentionally small so that the example remains a
 purely educational illustration.
 """
+
+from pathlib import Path  # filesystem paths for project root resolution
+from datetime import datetime, timezone  # timestamps for logging
+import sys  # access to Python's module search path
+from typing import Any  # type hints for dictionaries
 
 # Ensure that the project root (which contains the ``wrappers`` package) is
 # on the Python module search path even when executing this file via
@@ -57,7 +57,9 @@ def main() -> None:
         summary_before = client.get_account_summary()
         print("IG Markets EUR/USD order demo (demo account)")  # header
         print(f"  account id   : {summary_before.get('accountId')}")  # id
-        print(f"  snapshot @   : {datetime.now(timezone.utc).isoformat()}")  # time
+        print(
+            f"  snapshot @   : {datetime.now(timezone.utc).isoformat()}"
+        )  # time
         print(f"  before trade : {_pretty_account_line(summary_before)}")
 
         # 2) Retrieve current prices and choose simple distance levels.

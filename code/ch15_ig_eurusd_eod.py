@@ -1,11 +1,3 @@
-from pathlib import Path  # filesystem paths for output locations
-from datetime import datetime, timedelta, timezone  # date and time handling
-import sys  # access to Python's module search path
-
-import numpy as np  # numerical arrays and statistics
-import pandas as pd  # tabular time-series data structures
-import matplotlib.pyplot as plt  # plotting backend for figures
-
 """
 Python & AI for Algorithmic Trading
 Chapter 15 -- IG Markets and the Anatomy of an API Wrapper
@@ -34,6 +26,14 @@ The script performs three main tasks.
 The code is intentionally compact and fully commented so that it can serve
 as a template for other IG-based diagnostics.
 """
+
+from pathlib import Path  # filesystem paths for output locations
+from datetime import datetime, timedelta, timezone  # date and time handling
+import sys  # access to Python's module search path
+
+import numpy as np  # numerical arrays and statistics
+import pandas as pd  # tabular time-series data structures
+import matplotlib.pyplot as plt  # plotting backend for figures
 
 # Ensure that the project root (which contains the ``wrappers`` package) is
 # on the Python module search path even when executing this file via

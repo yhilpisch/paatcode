@@ -136,7 +136,8 @@ class EODHDClient:
         symbol:
             Ticker symbol such as ``\"SPY\"`` or ``\"AAPL\"``.
         exchange:
-            Exchange code used by EODHD (for example ``\"US\"`` or ``\"XETR\"``).
+            Exchange code used by EODHD (for example ``\"US\"`` or
+            ``\"XETR\"``).
         period:
             Aggregation frequency ``\"d\"`` (daily), ``\"w\"`` (weekly), or
             ``\"m\"`` (monthly). The default is daily.
@@ -209,7 +210,8 @@ class EODHDClient:
         exchange:
             Exchange code used by EODHD, for example ``\"US\"``.
         period:
-            Bar length as a string; one of ``\"1m\"``, ``\"5m\"``, or ``\"1h\"``.
+            Bar length as a string; one of ``\"1m\"``, ``\"5m\"``, or
+            ``\"1h\"``.
         start, stop:
             Optional start and end timestamps for the intraday window. Both
             can be :class:`datetime.date` or :class:`datetime.datetime`

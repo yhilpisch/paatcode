@@ -1,11 +1,3 @@
-from pathlib import Path  # filesystem paths for output locations
-from datetime import datetime, timedelta, timezone  # time window selection
-import sys  # access to Python's module search path
-
-import pandas as pd  # tabular time-series data structures
-import matplotlib.pyplot as plt  # base plotting backend
-import mplfinance as mpf  # Matplotlib-based OHLC plotting
-
 """
 Python & AI for Algorithmic Trading
 Chapter 14 -- Working with Oanda Demo Accounts
@@ -33,6 +25,14 @@ The script performs three main tasks.
 The code is intentionally compact and fully commented so that it can
 serve as an example for other custom-bar visualisations.
 """
+
+from pathlib import Path  # filesystem paths for output locations
+from datetime import datetime, timedelta, timezone  # time window selection
+import sys  # access to Python's module search path
+
+import pandas as pd  # tabular time-series data structures
+import matplotlib.pyplot as plt  # base plotting backend
+import mplfinance as mpf  # Matplotlib-based OHLC plotting
 
 # Ensure that the project root (which contains the ``wrappers`` package) is
 # on the Python module search path even when executing this file via
@@ -145,7 +145,7 @@ def main() -> None:
     # Ensure that y-axes use plain numeric formatting on the left.
     for ax in (ax1, ax2):
         ax.yaxis.get_major_formatter().set_useOffset(False)  # no offsets
-        ax.ticklabel_format(style="plain", axis="y")  # avoid scientific notation
+        ax.ticklabel_format(style="plain", axis="y")  # no scientific notation
 
     # Hide x tick labels on the top panel so that time labels appear only
     # on the lower axis, making the shared time axis easier to read.

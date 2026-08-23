@@ -1,9 +1,3 @@
-from pathlib import Path  # filesystem paths for macro output
-
-import numpy as np  # numerical arrays and statistics
-import pandas as pd  # tabular time-series structures
-import matplotlib.pyplot as plt  # plotting library for figures
-
 """
 Python & AI for Algorithmic Trading
 Chapter 7 -- Baseline Technical Strategies and Vectorised Backtesting
@@ -14,10 +8,10 @@ AI-Powered by different LLMs | https://linktr.ee/dyjh
 Baseline technical strategy backtests and figures for Chapter 7.
 
 This script implements a simple moving-average crossover strategy on a
-single instrument, compares it with a buy-and-hold benchmark, and reports performance metrics
-that are reused in the LaTeX chapter. The backtest incorporates both
-transaction costs and daily financing charges to reflect leveraged trading
-on retail platforms.
+single instrument, compares it with a buy-and-hold benchmark, and
+reports performance metrics that are reused in the LaTeX chapter. The
+backtest incorporates both transaction costs and daily financing charges
+to reflect leveraged trading on retail platforms.
 
 Running the script performs three main tasks.
 
@@ -33,6 +27,12 @@ Running the script performs three main tasks.
 The code is intentionally compact but fully commented so that it can serve
 as a blueprint for more elaborate strategy backtests later in the book.
 """
+
+from pathlib import Path  # filesystem paths for macro output
+
+import numpy as np  # numerical arrays and statistics
+import pandas as pd  # tabular time-series structures
+import matplotlib.pyplot as plt  # plotting library for figures
 
 from ch05_eod_engineering import load_eod_panel  # static EOD price panel
 
@@ -354,7 +354,10 @@ def select_sma_parameters(
         metrics_sma = compute_metrics(net_sma)
         start_date = net_bh.index[0]
 
-        return net_bh, net_sma, metrics_bh, metrics_sma, (20, 100), 1.0, start_date
+        return (
+            net_bh, net_sma, metrics_bh, metrics_sma, (20, 100), 1.0,
+            start_date,
+        )
 
     return (
         best_net_bh,
@@ -668,7 +671,9 @@ def main() -> None:
         metrics_coin,
         trades_coin,
     )  # LaTeX helper macros
-    plot_equity_curves(net_ret_bh, net_ret_sma, net_ret_coin)  # equity-curve figure
+    plot_equity_curves(  # equity-curve figure
+        net_ret_bh, net_ret_sma, net_ret_coin
+    )
 
     # Print a concise console summary for interactive inspection.
     print("Buy-and-hold (EUR/USD) metrics:")  # header for benchmark stats

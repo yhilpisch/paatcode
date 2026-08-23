@@ -1,7 +1,3 @@
-import numpy as np  # numerical arrays and statistics
-import pandas as pd  # data loading and time-series handling
-import matplotlib.pyplot as plt  # plotting library for equity curves
-
 """
 Python & AI for Algorithmic Trading
 Chapter 2 -- Practical Python Tests of Market Efficiency
@@ -24,6 +20,10 @@ equity-curve plots that visualise how a small number of extreme days dominate
 long-run performance. It also writes a LaTeX helper file with macros so that
 the cumulative returns reported in the manuscript stay in sync with the data.
 """
+
+import numpy as np  # numerical arrays and statistics
+import pandas as pd  # data loading and time-series handling
+import matplotlib.pyplot as plt  # plotting library for equity curves
 
 plt.style.use("seaborn-v0_8")  # consistent plotting style
 
@@ -304,7 +304,8 @@ if __name__ == "__main__":
         n: cumulative_return(series) for n, series in miss_best_returns.items()
     }
     avoid_worst_perf = {  # cumulative returns for avoid-worst cases
-        n: cumulative_return(series) for n, series in avoid_worst_returns.items()
+        n: cumulative_return(series)
+        for n, series in avoid_worst_returns.items()
     }
 
     print("SPY extreme-day performance analysis")  # console summary

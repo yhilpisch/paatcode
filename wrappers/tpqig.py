@@ -91,7 +91,9 @@ class IGClient:
             try:
                 self.service.logout()
             except AttributeError:
-                LOG.debug("IG logout endpoint not available in stubbed service.")
+                LOG.debug(
+                    "IG logout endpoint not available in stubbed service."
+                )
             self._session_active = False
 
     # ------------------------------------------------------------------
@@ -123,7 +125,9 @@ class IGClient:
         epic = self._resolve_epic(instrument)
         market = self.service.fetch_market_by_epic(epic)
         snapshot = self._extract_snapshot(market)
-        timestamp = snapshot.get("snapshotTime") or snapshot.get("snapshotTimeUTC")
+        timestamp = (
+            snapshot.get("snapshotTime") or snapshot.get("snapshotTimeUTC")
+        )
         bid = self._to_float(snapshot.get("bid"))
         ask = self._to_float(snapshot.get("offer"))
         if bid is None or ask is None:
@@ -143,7 +147,9 @@ class IGClient:
         self._ensure_session()
         epic = self._resolve_epic(instrument)
         if num_points is not None and (start or end):
-            raise ValueError("Supply either num_points or start/end dates, not both.")
+            raise ValueError(
+                "Supply either num_points or start/end dates, not both."
+            )
         with warnings.catch_warnings():
             warnings.filterwarnings(
                 "ignore",
@@ -160,9 +166,13 @@ class IGClient:
             else:
                 if start is None or end is None:
                     raise ValueError(
-                        "Start and end dates are required when num_points is missing."
+                        "Start and end dates are required when "
+                        "num_points is missing."
                     )
-                payload = self.service.fetch_historical_prices_by_epic_and_date_range(
+                fetch_range = (
+                    self.service.fetch_historical_prices_by_epic_and_date_range
+                )
+                payload = fetch_range(
                     epic=epic,
                     resolution=granularity,
                     start_date=self._format_datetime(start),
@@ -321,7 +331,9 @@ class IGClient:
         except (TypeError, ValueError):
             return None
 
-    def _format_prices(self, prices: list[dict[str, Any]], version: str) -> pd.DataFrame:
+    def _format_prices(
+        self, prices: list[dict[str, Any]], version: str
+    ) -> pd.DataFrame:
         if isinstance(prices, pd.DataFrame):
             return prices
         rows = []

@@ -1,12 +1,3 @@
-from collections import deque  # simple FIFO queue for events
-from dataclasses import dataclass  # lightweight event containers
-from pathlib import Path  # filesystem paths for macro and figure output
-
-from pprint import pprint  # pretty printing of metric dictionaries
-import numpy as np  # numerical arrays
-import pandas as pd  # tabular time-series structures
-import matplotlib.pyplot as plt  # plotting library for figures
-
 """
 Python & AI for Algorithmic Trading
 Chapter 11 -- Event-Based Backtesting Framework
@@ -37,6 +28,15 @@ event-driven positions, compares them with a vectorised buy-and-hold
 benchmark, and exports LaTeX macros and an equity-curve figure for
 Chapter 11.
 """
+
+from collections import deque  # simple FIFO queue for events
+from dataclasses import dataclass  # lightweight event containers
+from pathlib import Path  # filesystem paths for macro and figure output
+
+from pprint import pprint  # pretty printing of metric dictionaries
+import numpy as np  # numerical arrays
+import pandas as pd  # tabular time-series structures
+import matplotlib.pyplot as plt  # plotting library for figures
 
 from ch05_eod_engineering import load_eod_panel  # static EOD price panel
 from ch07_baseline_strategies import (  # backtest helpers
