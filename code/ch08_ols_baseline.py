@@ -10,7 +10,7 @@ Python & AI for Algorithmic Trading
 Chapter 8 -- Predictive Modelling: OLS, Machine & Deep Learning
 
 (c) Dr. Yves J. Hilpisch | The Python Quants GmbH
-AI-powered by GPT 5.1 | https://linktr.ee/dyjh
+AI-Powered by different LLMs | https://linktr.ee/dyjh
 
 Baseline predictive modelling example for Chapter 8.
 

@@ -12,7 +12,7 @@ Python & AI for Algorithmic Trading
 Chapter 11 -- Event-Based Backtesting Framework
 
 (c) Dr. Yves J. Hilpisch | The Python Quants GmbH
-AI-powered by GPT 5.1 | https://linktr.ee/dyjh
+AI-Powered by different LLMs | https://linktr.ee/dyjh
 
 Event-based SMA crossover backtest on daily data.
 

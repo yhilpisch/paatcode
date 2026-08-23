@@ -2,7 +2,7 @@
 Chapter 15 -- IG Markets and the Anatomy of an API Wrapper
 
 (c) Dr. Yves J. Hilpisch | The Python Quants GmbH
-AI-powered by GPT 5.1 | https://linktr.ee/dyjh
+AI-Powered by different LLMs | https://linktr.ee/dyjh
 
 Thin wrapper for the IG Markets REST and streaming APIs.
 """

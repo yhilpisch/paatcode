@@ -11,7 +11,7 @@ Python & AI for Algorithmic Trading
 Chapter 15 -- IG Markets and the Anatomy of an API Wrapper
 
 (c) Dr. Yves J. Hilpisch | The Python Quants GmbH
-AI-powered by GPT 5.1 | https://linktr.ee/dyjh
+AI-Powered by different LLMs | https://linktr.ee/dyjh
 
 IG Markets EUR/USD end-of-day diagnostics for Chapter 15.
 

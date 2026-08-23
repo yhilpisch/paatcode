@@ -10,7 +10,7 @@ Python & AI for Algorithmic Trading
 Chapter 5 -- Static EOD Data: CSV Baseline and Data Engineering
 
 (c) Dr. Yves J. Hilpisch | The Python Quants GmbH
-AI-powered by GPT 5.1 | https://linktr.ee/dyjh
+AI-Powered by different LLMs | https://linktr.ee/dyjh
 
 Static end-of-day data engineering utilities and figures for Chapter 5.
 

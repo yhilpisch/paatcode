@@ -9,7 +9,7 @@ Python & AI for Algorithmic Trading
 Chapter 20 -- AI-Enhanced Research and Automation Workflows
 
 (c) Dr. Yves J. Hilpisch | The Python Quants GmbH
-AI-powered by GPT 5.1 | https://linktr.ee/dyjh
+AI-Powered by different LLMs | https://linktr.ee/dyjh
 
 Prompt and transcript helpers for AI-assisted research workflows.
 

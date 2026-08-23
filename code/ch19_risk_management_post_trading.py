@@ -10,7 +10,7 @@ Python & AI for Algorithmic Trading
 Chapter 19 -- Risk Management and Post-Trading Analysis
 
 (c) Dr. Yves J. Hilpisch | The Python Quants GmbH
-AI-powered by GPT 5.1 | https://linktr.ee/dyjh
+AI-Powered by different LLMs | https://linktr.ee/dyjh
 
 Trade-level risk and post-trade analytics helpers.
 

@@ -19,7 +19,7 @@ Python & AI for Algorithmic Trading
 Chapter 12 -- ZeroMQ and Real-Time Market Data Sandboxes
 
 (c) Dr. Yves J. Hilpisch | The Python Quants GmbH
-AI-powered by GPT 5.1 | https://linktr.ee/dyjh
+AI-Powered by different LLMs | https://linktr.ee/dyjh
 
 Portfolio watcher with q-based logging.
 

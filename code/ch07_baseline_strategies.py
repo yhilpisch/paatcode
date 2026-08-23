@@ -9,7 +9,7 @@ Python & AI for Algorithmic Trading
 Chapter 7 -- Baseline Technical Strategies and Vectorised Backtesting
 
 (c) Dr. Yves J. Hilpisch | The Python Quants GmbH
-AI-powered by GPT 5.1 | https://linktr.ee/dyjh
+AI-Powered by different LLMs | https://linktr.ee/dyjh
 
 Baseline technical strategy backtests and figures for Chapter 7.
 

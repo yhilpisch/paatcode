@@ -6,7 +6,7 @@ Python & AI for Algorithmic Trading
 Chapter 4 -- The Scientific Python Stack for Algorithmic Trading
 
 (c) Dr. Yves J. Hilpisch | The Python Quants GmbH
-AI-powered by GPT 5.1 | https://linktr.ee/dyjh
+AI-Powered by different LLMs | https://linktr.ee/dyjh
 
 Toy NumPy and Matplotlib equity-curve figure for Chapter 4.
 
