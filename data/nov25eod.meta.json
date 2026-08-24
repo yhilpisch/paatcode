@@ -1,0 +1,35 @@
+{
+  "file": "nov25eod.csv",
+  "source_institution": "The Python Quants GmbH",
+  "source_urls": [
+    "https://hilpisch.com/nov25eod.csv"
+  ],
+  "retrieval_date": "2026-01-27",
+  "redistribution_note": "Bundled for educational companion use. The repository does not record the upstream market-data vendors or their redistribution terms.",
+  "transformation_summary": "No repository-side transformation is recorded. The CSV is a wide panel of adjusted or representative end-of-day price levels as distributed at the source URL.",
+  "schema": {
+    "Date": "ISO calendar date",
+    "AAPL": "Apple price level",
+    "NVDA": "NVIDIA price level",
+    "JPM": "JPMorgan Chase price level",
+    "SPY": "SPDR S&P 500 ETF Trust price level",
+    "GLD": "SPDR Gold Shares price level",
+    "TLT": "iShares 20+ Year Treasury Bond ETF price level",
+    "EURUSD": "EUR/USD exchange-rate level",
+    "BTC-USD": "Bitcoin/U.S. dollar price level"
+  },
+  "coverage": {
+    "rows": 2515,
+    "start_date": "2015-11-30",
+    "end_date": "2025-11-28",
+    "missing_values": {
+      "EURUSD": 312
+    }
+  },
+  "intended_chapter_usage": [
+    "Chapter 2",
+    "Chapter 5",
+    "Chapters 7-11",
+    "strategy labs"
+  ]
+}

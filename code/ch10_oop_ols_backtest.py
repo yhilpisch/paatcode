@@ -45,7 +45,7 @@ from ch07_baseline_strategies import (  # backtest helpers
 )
 from ch08_ols_baseline import (  # OLS utilities from Chapter 8
     prepare_ml_dataset,
-    standardise_features,
+    standardise_train_test,
     fit_ols,
     predict_ols,
     sweep_ols_parameters,
@@ -122,19 +122,21 @@ class OLSStrategy:
             features_lagged = features_lagged.loc[start_ts:end_ts]
             targets = targets.loc[features_lagged.index]
 
-        features_scaled = standardise_features(features_lagged)
-
-        n_obs = features_scaled.shape[0]
+        n_obs = features_lagged.shape[0]
         split_idx = int(self.train_fraction * n_obs)
+        train_scaled, test_scaled = standardise_train_test(
+            features_lagged,
+            split_idx,
+        )
 
-        X_train = features_scaled.iloc[:split_idx].to_numpy()
+        X_train = train_scaled.to_numpy()
         y_train = targets.iloc[:split_idx].to_numpy()
 
-        X_test = features_scaled.iloc[split_idx:].to_numpy()
+        X_test = test_scaled.to_numpy()
         y_test = targets.iloc[split_idx:].to_numpy()
 
-        self.train_index = features_scaled.index[:split_idx]
-        self.test_index = features_scaled.index[split_idx:]
+        self.train_index = train_scaled.index
+        self.test_index = test_scaled.index
 
         beta = fit_ols(X_train, y_train)
         self.beta = beta
@@ -161,16 +163,18 @@ class OLSStrategy:
             features_lagged = features_lagged.loc[start_ts:end_ts]
             targets = targets.loc[features_lagged.index]
 
-        features_scaled = standardise_features(features_lagged)
-
-        n_obs = features_scaled.shape[0]
+        n_obs = features_lagged.shape[0]
         split_idx = int(self.train_fraction * n_obs)
+        _, test_scaled = standardise_train_test(
+            features_lagged,
+            split_idx,
+        )
 
-        X_test = features_scaled.iloc[split_idx:].to_numpy()
+        X_test = test_scaled.to_numpy()
 
         y_hat_test = predict_ols(self.beta, X_test)
 
-        signal = pd.Series(0.0, index=features_scaled.index)
+        signal = pd.Series(0.0, index=features_lagged.index)
         base_signal = np.sign(y_hat_test)
         if self.entry_threshold > 0.0:
             active = np.abs(y_hat_test) > self.entry_threshold
@@ -178,8 +182,8 @@ class OLSStrategy:
 
         signal.iloc[split_idx:] = base_signal
 
-        position = self.leverage * signal.shift(1).fillna(0.0)
-          # trade on next day's return
+        position = self.leverage * signal
+          # lagged features already align each signal with its return period
         position = position.loc[self.test_index]
           # restrict to test window for evaluation
         return position

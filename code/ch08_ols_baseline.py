@@ -87,12 +87,18 @@ def prepare_ml_dataset(
     return features_lagged, targets
 
 
-def standardise_features(features: pd.DataFrame) -> pd.DataFrame:
-    """Standardise each feature column to zero mean and unit variance."""
-    mean = features.mean()  # column means
-    std = features.std(ddof=0).replace(0.0, 1.0)  # avoid division by zero
-    scaled = (features - mean) / std  # z-scored features
-    return scaled
+def standardise_train_test(
+    features: pd.DataFrame,
+    split_idx: int,
+) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Scale train and test features with training-window statistics."""
+    train = features.iloc[:split_idx]
+    test = features.iloc[split_idx:]
+    mean = train.mean()  # training-window column means
+    std = train.std(ddof=0).replace(0.0, 1.0)  # avoid division by zero
+    train_scaled = (train - mean) / std
+    test_scaled = (test - mean) / std
+    return train_scaled, test_scaled
 
 
 def fit_ols(
@@ -409,34 +415,36 @@ def sweep_ols_parameters(
             features_lagged = features_lagged.loc[start_ts:end_ts]
             targets = targets.loc[start_ts:end_ts]
 
-        features_scaled = standardise_features(features_lagged)
-
-        n_obs = features_scaled.shape[0]
+        n_obs = features_lagged.shape[0]
         if n_obs < 40:  # skip very short samples
             continue
 
         split_idx = int(train_fraction * n_obs)
-        X_train = features_scaled.iloc[:split_idx].to_numpy()
+        train_scaled, test_scaled = standardise_train_test(
+            features_lagged,
+            split_idx,
+        )
+        X_train = train_scaled.to_numpy()
         y_train = targets.iloc[:split_idx].to_numpy()
-        X_test = features_scaled.iloc[split_idx:].to_numpy()
+        X_test = test_scaled.to_numpy()
         y_test = targets.iloc[split_idx:].to_numpy()
 
         beta = fit_ols(X_train, y_train)
         y_hat_test = predict_ols(beta, X_test)
 
-        idx_test = features_scaled.index[split_idx:]
+        idx_test = test_scaled.index
         base_signal = np.sign(y_hat_test)  # directional signal
 
         for entry in entry_values:
             for lev in leverage_values:
-                signal = pd.Series(0.0, index=features_scaled.index)
+                signal = pd.Series(0.0, index=features_lagged.index)
                 raw_signal = base_signal.copy()
                 if entry > 0.0:
                     active = np.abs(y_hat_test) > entry
                     raw_signal = np.where(active, raw_signal, 0.0)
                 signal.loc[idx_test] = raw_signal
 
-                position_ols = lev * signal.shift(1).fillna(0.0)
+                position_ols = lev * signal
 
                 pos_bh = build_positions_buy_and_hold(prices)
 
@@ -447,7 +455,7 @@ def sweep_ols_parameters(
                     fin_rate=fin,
                 )
 
-                test_start_ts = features_scaled.index[split_idx]
+                test_start_ts = test_scaled.index[0]
                 net_ols_test = net_ols.loc[test_start_ts:]
                 metrics_ols = compute_metrics(net_ols_test)
                 trades_ols = count_trades(position_ols)
@@ -581,15 +589,17 @@ def main(
         features_lagged = features_lagged.loc[start_ts:end_ts]
         targets = targets.loc[start_ts:end_ts]
 
-    features_scaled = standardise_features(features_lagged)  # z-scored
-
     # Train/test split that respects time order
-    n_obs = features_scaled.shape[0]
+    n_obs = features_lagged.shape[0]
     split_idx = int(train_fraction * n_obs)  # training fraction
 
-    X_train = features_scaled.iloc[:split_idx].to_numpy()
+    train_scaled, test_scaled = standardise_train_test(
+        features_lagged,
+        split_idx,
+    )
+    X_train = train_scaled.to_numpy()
     y_train = targets.iloc[:split_idx].to_numpy()
-    X_test = features_scaled.iloc[split_idx:].to_numpy()
+    X_test = test_scaled.to_numpy()
     y_test = targets.iloc[split_idx:].to_numpy()
 
     beta = fit_ols(X_train, y_train)  # OLS coefficients
@@ -601,21 +611,18 @@ def main(
     corr_test = float(np.corrcoef(y_test, y_hat_test)[0, 1])  # test corr
 
     # Strategy positions based on the sign and magnitude of predictions
-    idx_test = features_scaled.index[split_idx:]
+    idx_test = test_scaled.index
 
-    signal = pd.Series(0.0, index=features_scaled.index)  # default flat
+    signal = pd.Series(0.0, index=features_lagged.index)  # default flat
     raw_signal = np.sign(y_hat_test)  # directional signal
     if entry_selected > 0.0:
         active = np.abs(y_hat_test) > entry_selected
         raw_signal = np.where(active, raw_signal, 0.0)
     signal.loc[idx_test] = raw_signal  # prediction-based signal on test
 
-    # Convert prediction-based signal to positions for backtesting;
-    # shifting by one day ensures that decisions made at the end of
-    # day t affect returns on day t+1 and that the equity curve is
-    # flat until the first non-zero position.
-    position_ols = leverage_selected * signal.shift(1).fillna(0.0)
-      # scaled exposure
+    # Features at date t are already lagged through t-1, so the signal can
+    # be held over return period t without another shift.
+    position_ols = leverage_selected * signal  # scaled exposure
 
     # Price series and buy-and-hold benchmark
     panel = load_eod_panel()  # full price panel from Chapter 5
@@ -628,10 +635,10 @@ def main(
     trades_bh = count_trades(pos_bh)  # benchmark trades
     trades_ols = count_trades(position_ols)  # OLS-strategy trades
 
-    train_start = features_scaled.index[0].date().isoformat()
-    train_end = features_scaled.index[split_idx - 1].date().isoformat()
-    test_start = features_scaled.index[split_idx].date().isoformat()
-    test_end = features_scaled.index[-1].date().isoformat()
+    train_start = train_scaled.index[0].date().isoformat()
+    train_end = train_scaled.index[-1].date().isoformat()
+    test_start = test_scaled.index[0].date().isoformat()
+    test_end = test_scaled.index[-1].date().isoformat()
 
     net_bh = backtest_strategy(  # benchmark returns
         prices,
@@ -649,7 +656,7 @@ def main(
     # For a fair comparison in figures and tables, restrict both return
     # series to the test window where the OLS strategy is active and
     # normalise wealth from that point onwards.
-    test_start_ts = features_scaled.index[split_idx]
+    test_start_ts = test_scaled.index[0]
     net_bh_test = net_bh.loc[test_start_ts:]
     net_ols_test = net_ols.loc[test_start_ts:]
 

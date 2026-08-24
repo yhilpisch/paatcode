@@ -5,6 +5,9 @@
 .Trashes
 *.png
 data/
+!/data/
+!/data/nov25eod.csv
+!/data/nov25eod.meta.json
 ref/
 deploy/
 reports/
