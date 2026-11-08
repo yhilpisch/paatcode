@@ -1,3 +1,13 @@
+"""
+Python & AI for Algorithmic Trading
+Chapters 12--14 -- Streaming Sandbox
+
+(c) Dr. Yves J. Hilpisch | The Python Quants GmbH
+AI-Powered by different LLMs | https://linktr.ee/dyjh
+
+Reads stored ticks and prints a mark-to-market price-history report.
+"""
+
 from __future__ import annotations
 
 from dataclasses import dataclass  # configuration container
