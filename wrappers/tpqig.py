@@ -1,8 +1,10 @@
 """Python & AI for Algorithmic Trading
 Chapter 15 -- IG Markets and the Anatomy of an API Wrapper
 
-(c) Dr. Yves J. Hilpisch | The Python Quants GmbH
-AI-Powered by different LLMs | https://linktr.ee/dyjh
+(c) Dr. Yves J. Hilpisch
+AI-Powered by different LLMs
+The Python Quants GmbH | https://tpq.io
+https://hilpisch.com | https://linktr.ee/dyjh
 
 Thin wrapper for the IG Markets REST and streaming APIs.
 """

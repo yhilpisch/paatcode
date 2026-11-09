@@ -2,8 +2,10 @@
 Python & AI for Algorithmic Trading
 Chapter 18 -- Logging, Failure Management, and Resilience
 
-(c) Dr. Yves J. Hilpisch | The Python Quants GmbH
-AI-Powered by different LLMs | https://linktr.ee/dyjh
+(c) Dr. Yves J. Hilpisch
+AI-Powered by different LLMs
+The Python Quants GmbH | https://tpq.io
+https://hilpisch.com | https://linktr.ee/dyjh
 
 Logging and failure-handling helpers for small trading systems.
 

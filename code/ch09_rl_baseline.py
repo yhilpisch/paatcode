@@ -2,8 +2,10 @@
 Python & AI for Algorithmic Trading
 Chapter 9 -- Reinforcement Learning for Trading Decisions
 
-(c) Dr. Yves J. Hilpisch | The Python Quants GmbH
-AI-Powered by different LLMs | https://linktr.ee/dyjh
+(c) Dr. Yves J. Hilpisch
+AI-Powered by different LLMs
+The Python Quants GmbH | https://tpq.io
+https://hilpisch.com | https://linktr.ee/dyjh
 
 Tabular reinforcement-learning example for daily trading decisions.
 

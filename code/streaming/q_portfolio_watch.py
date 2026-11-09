@@ -2,8 +2,10 @@
 Python & AI for Algorithmic Trading
 Chapters 12--14 -- Streaming Sandbox
 
-(c) Dr. Yves J. Hilpisch | The Python Quants GmbH
-AI-Powered by different LLMs | https://linktr.ee/dyjh
+(c) Dr. Yves J. Hilpisch
+AI-Powered by different LLMs
+The Python Quants GmbH | https://tpq.io
+https://hilpisch.com | https://linktr.ee/dyjh
 
 Marks a small portfolio to market from stored ticks and logs alerts.
 """
@@ -28,8 +30,10 @@ from code.streaming.sqlite_portfolio_report import (  # type: ignore
 Python & AI for Algorithmic Trading
 Chapter 12 -- ZeroMQ and Real-Time Market Data Sandboxes
 
-(c) Dr. Yves J. Hilpisch | The Python Quants GmbH
-AI-Powered by different LLMs | https://linktr.ee/dyjh
+(c) Dr. Yves J. Hilpisch
+AI-Powered by different LLMs
+The Python Quants GmbH | https://tpq.io
+https://hilpisch.com | https://linktr.ee/dyjh
 
 Portfolio watcher with q-based logging.
 

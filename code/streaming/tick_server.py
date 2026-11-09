@@ -2,8 +2,10 @@
 Python & AI for Algorithmic Trading
 Chapters 12--14 -- Streaming Sandbox
 
-(c) Dr. Yves J. Hilpisch | The Python Quants GmbH
-AI-Powered by different LLMs | https://linktr.ee/dyjh
+(c) Dr. Yves J. Hilpisch
+AI-Powered by different LLMs
+The Python Quants GmbH | https://tpq.io
+https://hilpisch.com | https://linktr.ee/dyjh
 
 Publishes synthetic tick updates for SPY, GLD, and EURUSD over ZeroMQ.
 """
@@ -23,8 +25,10 @@ import zmq  # ZeroMQ messaging library
 Python & AI for Algorithmic Trading
 Chapter 12 -- ZeroMQ and Real-Time Market Data Sandboxes
 
-(c) Dr. Yves J. Hilpisch | The Python Quants GmbH
-AI-Powered by different LLMs | https://linktr.ee/dyjh
+(c) Dr. Yves J. Hilpisch
+AI-Powered by different LLMs
+The Python Quants GmbH | https://tpq.io
+https://hilpisch.com | https://linktr.ee/dyjh
 
 Local ZeroMQ tick server for three synthetic instruments.
 
